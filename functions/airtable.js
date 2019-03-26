@@ -6,7 +6,7 @@ console.log(AIRTABLE_API_KEY);
 const getDatabase = async (table) => {
   return new Promise((resolve, reject) => {
     http.get({
-      host: 'api.airtable.com',
+      host: 'https://api.airtable.com',
       path: `/v0/appbxQ4N0x22IeQZW/${table}?view=Online&api_key=${AIRTABLE_API_KEY}`
   }, function(response) {
       // Continuously update stream with data
