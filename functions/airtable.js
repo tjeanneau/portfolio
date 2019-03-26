@@ -16,7 +16,9 @@ const getDatabase = async (table) => {
       });
       response.on('end', function() {
           // Data reception is done, do whatever with it!
+          console.log(body)
           var data = JSON.parse(body);
+          console.log(data)
           resolve(data);
       });
       response.on('error', function(e) {
