@@ -1,8 +1,6 @@
 const https = require('https');
 const { AIRTABLE_API_KEY } = process.env;
 
-console.log(AIRTABLE_API_KEY);
-
 const getDatabase = async (table) => {
   const url = `https://api.airtable.com/v0/appbxQ4N0x22IeQZW/${table}?view=Online&api_key=${AIRTABLE_API_KEY}`
   return new Promise((resolve, reject) => {
@@ -14,8 +12,8 @@ const getDatabase = async (table) => {
       });
       response.on('end', function() {
           // Data reception is done, do whatever with it!
-          var data = JSON.parse(body);
-          resolve(data);
+          var { records } = JSON.parse(body);
+          resolve(records);
       });
       response.on('error', function(e) {
         console.log(e);
@@ -34,6 +32,6 @@ exports.handler = async (event, context, callback) => {
   console.log('Tools', tools)
   return {
     statusCode: 200,
-    body: { experiences, testimonials, tools }
+    body: JSON.stringify({ experiences, testimonials, tools })
   }
 }
