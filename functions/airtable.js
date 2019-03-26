@@ -14,9 +14,7 @@ const getDatabase = async (table) => {
       });
       response.on('end', function() {
           // Data reception is done, do whatever with it!
-          console.log(body)
           var data = JSON.parse(body);
-          console.log(data)
           resolve(data);
       });
       response.on('error', function(e) {
@@ -29,8 +27,11 @@ const getDatabase = async (table) => {
 
 exports.handler = async (event, context, callback) => {
   const experiences = await getDatabase('Experiences')
+  console.log('Experiences', experiences)
   const testimonials = await getDatabase('Testimonials')
+  console.log('Testimonials', testimonials)
   const tools = await getDatabase('Tools')
+  console.log('Tools', tools)
   return {
     statusCode: 200,
     body: { experiences, testimonials, tools }
